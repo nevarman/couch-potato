@@ -1,9 +1,8 @@
 #!/usr/bin/python3
-import brower_provider
 from selenium import webdriver
-from streaming_provider import StreamingProvider
-import getopt
+from providers.streaming_provider import StreamingProviderSettings, StreamingProvider
 import sys
+import getopt
 
 # read commandline arguments, first
 fullCmdArguments = sys.argv
@@ -36,10 +35,9 @@ for currentArgument, currentValue in arguments:
         print(("opening browser: (%s)") % (currentValue))
         browser = currentValue.lower()
 
-# browser
-browser = brower_provider.get_brower(browser)
+settings = StreamingProviderSettings(potato, browser)
 # potato
-provider = StreamingProvider(browser, potato).get_potato()
+provider = StreamingProvider(settings).get_potato()
 # login
 provider.login(user=user)
 # skip
