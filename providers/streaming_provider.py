@@ -6,13 +6,12 @@ from providers import brower_provider
 class StreamingProvider:
 
     def __init__(self, settings):
-        self.browser = settings.browser
-        self.potato = settings.potato
-        self.cr = settings.credentials
+        self.settings = settings
 
     def get_potato(self):
-        if(self.potato == 'netflix'):
-            return Netflix_Potato(self.cr, self.browser)
+        if(self.settings.potato == 'netflix'):
+            return Netflix_Potato(self.settings)
+        # amazon prime ?...
 
 
 class StreamingProviderSettings:

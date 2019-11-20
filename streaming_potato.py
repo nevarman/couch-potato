@@ -8,9 +8,10 @@ Base class for streaming apps
 
 class StreamingPotato:
 
-    def __init__(self, credentials, browser):
-        self.credentials = credentials
-        self.browser = browser
+    def __init__(self, settings):
+        self.settings = settings
+        self.credentials = settings.credentials
+        self.browser = settings.browser
 
     @abstractmethod
     def _open(self):

@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 from selenium import webdriver
 from providers.streaming_provider import StreamingProviderSettings, StreamingProvider
-import sys
 import getopt
+import sys
 
 # read commandline arguments, first
 fullCmdArguments = sys.argv

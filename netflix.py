@@ -7,8 +7,8 @@ from streaming_potato import StreamingPotato
 
 class Netflix_Potato(StreamingPotato):
 
-    def __init__(self, credentials, browser):
-        super().__init__(credentials, browser)
+    def __init__(self, settings):
+        super().__init__(settings)
         self._open()
 
     def _open(self):
