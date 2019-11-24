@@ -37,8 +37,8 @@ for currentArgument, currentValue in arguments:
 
 settings = StreamingProviderSettings(potato, browser)
 # potato
-provider = StreamingProvider(settings).get_potato()
+streaming_potato = StreamingProvider(settings).get_potato()
 # login
-provider.login(user=user)
+streaming_potato.login(user=user)
 # skip
-provider.auto_skip()
+streaming_potato.auto_skip()
