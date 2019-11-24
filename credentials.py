@@ -10,12 +10,17 @@ filepath = 'user.txt'
 def get_credentials(account):
     try:
         users = open(filepath)
-        user = users.readline()
+        lines = users.readlines()
+        if(len(lines) == 0):
+            raise IOError('User file is empty!')
+        for line in lines:
+            if(account in line):
+                user = line.split(':')[1]
     except IOError:
         # If not exists, create the file
         users = open(filepath, 'w+')
-        user = input("User Name:")
-        users.write(user)
+        user = input("Please enter your %s user name:" % account)
+        users.write(''.join([account, ':', user]))
         users.close()
     pswd = keyring.get_password(account, user)
     if(pswd == None):
