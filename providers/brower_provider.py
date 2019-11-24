@@ -8,12 +8,12 @@ def get_brower(brower):
     user_path = get_user_data_dir(brower)
     if(brower == 'chrome'):
         chrome_options = webdriver.ChromeOptions()
-        if(len(user_path) > 0):
+        if(user_path != None and len(user_path) > 0):
             chrome_options.add_argument("user-data-dir=%s" % user_path)
         return webdriver.Chrome(options=chrome_options)
     elif brower == 'firefox':
         firefox_options = webdriver.FirefoxOptions()
-        if(len(user_path) > 0):
+        if(user_path != None and len(user_path) > 0):
             firefox_options.add_argument("user-data-dir=%s" % user_path)
         return webdriver.Firefox(options=firefox_options)
     raise Exception(
@@ -30,6 +30,6 @@ def get_user_data_dir(browser):
             return str(Path.joinpath(
                 Path.home(), 'AppData\\Roaming\\Mozilla\\Firefox\\Profiles'))
     elif(pl == 'Darwin'):
-        pass
+        pass  # TODO mac
     elif(pl == 'Linux'):
-        pass  # pass for now
+        pass  # TODO linux

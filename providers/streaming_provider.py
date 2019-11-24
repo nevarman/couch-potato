@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from netflix import Netflix_Potato
 import credentials
 from providers import brower_provider
