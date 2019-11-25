@@ -17,10 +17,12 @@ def get_brower(brower):
             firefox_options.add_argument("user-data-dir=%s" % user_path)
         return webdriver.Firefox(options=firefox_options)
     raise Exception(
-        'Please type in a browser name, such as chrome or firefox.')
+        'Please type in a valid browser name, chrome or firefox.')
 
 
 def get_user_data_dir(browser):
+    return None
+    # TODO for now no user data
     pl = platform.system()
     if(pl == 'Windows'):
         if(browser == 'chrome'):
