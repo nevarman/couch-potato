@@ -21,7 +21,7 @@ except getopt.error as err:
 
 potato = 'netflix'
 user = 0
-browser = 'chrome'
+browser = 'firefox'
 for currentArgument, currentValue in arguments:
     if currentArgument in ("-h", "--help"):
         print("displaying help")

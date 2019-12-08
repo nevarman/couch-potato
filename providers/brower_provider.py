@@ -13,6 +13,8 @@ def get_brower(brower):
         return webdriver.Chrome(options=chrome_options)
     elif brower == 'firefox':
         firefox_options = webdriver.FirefoxOptions()
+        firefox_options.set_preference(  # added for mac
+            'media.gmp-manager.updateEnabled', 'true')
         if(user_path != None and len(user_path) > 0):
             firefox_options.add_argument("user-data-dir=%s" % user_path)
         return webdriver.Firefox(options=firefox_options)

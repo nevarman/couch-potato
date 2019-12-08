@@ -3,6 +3,8 @@ import time
 import threading
 from streaming_potato import StreamingPotato
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.action_chains import ActionChains
 
 SELECTOR_USER = '#id_userLoginId'
 SELECTOR_PASS = '#id_password'
@@ -10,8 +12,6 @@ SELECTOR_LOGIN = '#appMountPoint > div > div.login-body > div > div > div.hybrid
 SELECTOR_SKIP_INTRO = '//*[@id="appMountPoint"]/div/div/div[1]/div/div/div[2]/div/div[3]/div[1]/a/span'
 SELECTOR_PROFILE = 'profile'
 SELECTOR_DEFAULT_PROFILE = '''//*[@id="appMountPoint"]/div/div/div[1]/div[1]/div[2]/div/div/ul/li[1]/div/a/div/div'''
-SELECTOR_RESUME = '''#appMountPoint > div > div > div:nth-child(1) > div > div > div.nfp.AkiraPlayer > div > div.PlayerControlsNeo__layout.PlayerControlsNeo__layout--inactive > div > div.PlayerControlsNeo__core-controls > div.PlayerControlsNeo__bottom-controls.PlayerControlsNeo__bottom-controls--faded > div.PlayerControlsNeo__button-control-row > button.touchable.PlayerControls--control-element.nfp-button-control.default-control-button.button-nfplayerPause'''
-SELECTOR_PAUSE = '''#appMountPoint > div > div > div:nth-child(1) > div > div > div.nfp.AkiraPlayer > div > div.PlayerControlsNeo__layout.PlayerControlsNeo__layout--inactive > div > div.PlayerControlsNeo__core-controls > div.PlayerControlsNeo__bottom-controls.PlayerControlsNeo__bottom-controls--faded > div.PlayerControlsNeo__button-control-row > button.touchable.PlayerControls--control-element.nfp-button-control.default-control-button.button-nfplayerPlay'''
 
 
 class Netflix_Potato(StreamingPotato):
@@ -56,18 +56,14 @@ class Netflix_Potato(StreamingPotato):
         return "watch" in self.browser.current_url
 
     def play(self):
-        if(self._is_watching()):
-            try:
-                self.browser.find_element_by_xpath(SELECTOR_RESUME).click()
-            except NoSuchElementException:
-                pass
+        self.pause()
 
     def pause(self):
         if(self._is_watching()):
-            try:
-                self.browser.find_element_by_xpath(SELECTOR_PAUSE).click()
-            except NoSuchElementException:
-                pass
+            # for now click space until we find a better way
+            actions = ActionChains(self.browser)
+            actions.send_keys(Keys.SPACE)
+            actions.perform()
 
     def auto_skip(self):
         if(self._is_watching()):
